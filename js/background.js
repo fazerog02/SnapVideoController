@@ -27,14 +27,16 @@ chrome.tabs.onUpdated.addListener(
                 chrome.tabs.getAllInWindow(
                     null,
                     (tabs) => {
-                        if(tabs.length <= 1){
-                            chrome.tabs.executeScript(tabId, {
-                                code: "startRecognizingWithInit();"
-                            });
-                        }else {
-                            chrome.tabs.executeScript(tabId, {
-                                code: "init();"
-                            });
+                        for(let i = 0; i < tabs.length; i++){
+                            if(tabs[i].id === tabId){
+                                chrome.tabs.executeScript(tabs[i].id, {
+                                    code: "startRecognizingWithInit();"
+                                });
+                            }else {
+                                chrome.tabs.executeScript(tabs[i].id, {
+                                    code: "stopRecognizing();"
+                                });
+                            }
                         }
                     }
                 );
