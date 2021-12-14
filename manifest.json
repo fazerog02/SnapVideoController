@@ -26,7 +26,6 @@
     },
     "permissions": [
         "background",
-        "tabs",
         "*://*/*"
     ]
 }
